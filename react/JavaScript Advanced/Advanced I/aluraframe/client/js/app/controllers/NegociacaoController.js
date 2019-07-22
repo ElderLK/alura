@@ -9,10 +9,17 @@ class NegociacaoController{
 
   adiciona(event){
     event.preventDefault();
+
+    let data = DateHelper.textoParaData(this._inputData.value);
+
     let negociacao = new Negociacao(
-      this._inputData.value.split('-'),
+      data,
       this._inputQuatidade.value,
       this._inputValor.value
     );
+
+    console.log(data)
+
+    console.log(DateHelper.dataParaTexto(data))
   }
 }
