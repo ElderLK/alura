@@ -11,7 +11,7 @@ class ProxyFactory {
                         return retorno;
                     }
                 }
-    
+                
                 return Reflect.get(target, prop, receiver);
              },
 

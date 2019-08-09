@@ -3,9 +3,9 @@ class View{
     this._elemento = elemento;
   }
 
-  _template(model) { throw new Error('Implementar _template');}
+  template(model) { throw new Error('Implementar template');}
 
   update(model){
-    this._elemento.innerHTML = this._template(model);
+    this._elemento.innerHTML = this.template(model);
   }
 }
