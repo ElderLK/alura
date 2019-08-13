@@ -22,4 +22,12 @@ class ListaNegociacoes{
     // Reflect.apply(this._armadilha, this._context, [this]);
   }
 
+  ordena(criterio) {
+    this._negociacoes.sort(criterio);        
+  }
+
+  inverteOrdem() {
+    this._negociacoes.reverse();
+  }
+
 }
