@@ -1,9 +1,13 @@
 class ProxyFactory {
-    static create(object, props, action){
-        return new Proxy(object, {
+    static create(objeto, props, action) {
+
+        return new Proxy(objeto, {
+
             get(target, prop, receiver){
+
                 if(props.includes(prop) 
-                && ProxyFactory._isFunction(target[prop])){
+                && ProxyFactory._ehFuncao(target[prop])){
+
                     return function() {
                         console.log(`O methodo ${prop} foi interceptado`);
                         let retorno = Reflect.apply(target[prop], target, arguments);
@@ -16,15 +20,17 @@ class ProxyFactory {
              },
 
              set(target, prop, value, receiver){
+                let retorno = Reflect.set(target, prop, value, receiver);
                 if(props.includes(prop)){
                     action(target); 
                 } 
-                return Reflect.set(target, prop, value, receiver);
+                return retorno;
              }
         });
     }
 
-    static _isFunction(param){
-        return typeof(param) == typeof(Function);
+    static _ehFuncao(func) {
+        
+        return typeof(func) == typeof(Function);
     }
 }

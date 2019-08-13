@@ -3,7 +3,6 @@ class MensagemView extends View{
     super(elemento);
   }
   template(model) {
-    console.log(JSON.stringify(model.texto));
     return model.texto ? `<p class='alert alert-info'>${model.texto}</p>`
     : '<p></p>';
   }
