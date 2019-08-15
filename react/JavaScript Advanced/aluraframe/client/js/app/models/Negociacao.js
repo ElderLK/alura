@@ -9,7 +9,7 @@ class Negociacao{
   }
 
   get volume(){
-    return this._quantidade * this._valor;
+    return parseFloat(this._quantidade * this._valor);
   }
 
   get data(){

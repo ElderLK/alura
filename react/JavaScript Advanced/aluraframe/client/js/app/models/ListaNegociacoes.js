@@ -7,7 +7,14 @@ class ListaNegociacoes{
   }
 
   adiciona(negociacoes) {
-    this._negociacoes.push(negociacoes);
+    if(Array.isArray(negociacoes)){
+      // negociacoes.forEach(neg => {
+      //   this._negociacoes.push(neg);
+      // })
+      this._negociacoes = this._negociacoes.concat(negociacoes)
+    } else {
+      this._negociacoes.push(negociacoes);
+    }
     // this._armadilha(this);
     // Reflect.apply(this._armadilha, this._context, [this]);
   }
