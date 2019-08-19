@@ -8,6 +8,10 @@ class Negociacao{
     Object.freeze(this);
   }
 
+  isEquals(outraNegociacao) {        
+    return JSON.stringify(this) == JSON.stringify(outraNegociacao)
+  }
+
   get volume(){
     return parseFloat(this._quantidade * this._valor);
   }

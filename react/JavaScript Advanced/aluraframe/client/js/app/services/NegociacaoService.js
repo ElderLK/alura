@@ -46,4 +46,64 @@ class NegociacaoService{
         })
       });
     }
+
+    cadastra(negociacao) {
+      return ConnectionFactory
+         .getConnection()
+         .then(conexao => new NegociacaoDao(conexao))
+         .then(dao => dao.adiciona(negociacao))
+         .then(() => 'Negociação cadastrada com sucesso')
+         .catch(erro => {
+             console.log(erro);
+             throw new Error("Não foi possível adicionar a negociação")
+         });
+    }
+
+    lista() {
+
+      return ConnectionFactory
+        .getConnection()
+        .then(connection => {
+          return new NegociacaoDao(connection)
+        })
+        .then(dao => dao.listaTodos())
+        .catch(erro => {
+              console.log(erro);
+              throw new Error("Não foi possível listar as negociações")
+        });
+    }
+
+    apaga(){
+      return ConnectionFactory
+      .getConnection()
+      .then((connection) => new NegociacaoDao(connection))
+      .then(dao => dao.removeTodos())
+      .then(() => 'Negociações apagadas com sucesso')
+      .catch(erro => {
+        console.log(erro);
+        throw new Error("Não foi possível apagar as negociações")
+       });
+    }
+
+    importa(listaNegociacoesAtual) {
+      return Promise.all([
+        this.getNegociacoesSemana(),
+        this.getNegociacoesSemanaAnterior(),
+        this.getNegociacoesSemanaRetrasada()
+      ])
+      .then((negociacoes) => {
+        return negociacoes.reduce((arrayAchatado, array) => arrayAchatado.concat(array), [])
+        .filter(negociacao => 
+           !listaNegociacoesAtual.some(negociacaoExistente =>{
+            return negociacao.isEquals(negociacaoExistente);
+           })
+        )
+      })
+      .catch(erro => {
+        console.log(erro);
+        throw new Error("Não foi possível apagar as negociações")
+       });
+    }
+
+
 }
