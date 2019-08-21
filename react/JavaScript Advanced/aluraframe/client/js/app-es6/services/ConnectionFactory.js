@@ -1,15 +1,11 @@
-// Module Pattern
-
-var ConnectionFactory = 
-(function (){
     const stores = ['negociacoes'];
     const version = 4;
     const dbName = 'aluraframe';
 
-    var connection = null;
-    var close = null;
+    let connection = null;
+    let close = null;
 
-    return class ConnectionFactory {
+    export class ConnectionFactory {
         
         constructor(){
             throw new Error('Não é permitido criar instâncias dessa classe');
@@ -57,5 +53,5 @@ var ConnectionFactory =
             connection = null;
         }
     }
-})();
+
 

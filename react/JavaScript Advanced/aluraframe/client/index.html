@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="css/bootstrap-theme.css">
 
     <!-- carregando nosso polyfill -->
-    <script src="js/app/polyfill/es6.js"></script>
+    <!-- <script src="js/app/polyfill/es6.js"></script> -->
 
 </head>
 <body class="container">
@@ -15,8 +15,8 @@
     <h1 class="text-center">Negociações</h1>
 
     <div id="mensagemView"></div>
-
-    <form class="form" onsubmit="negociacaoController.adiciona(event)">
+    <!-- onsubmit="negociacaoController.adiciona(event)" -->
+    <form class="form">
 
         <div class="form-group">
             <label for="data">Data</label>
@@ -38,10 +38,12 @@
     </form>
 
     <div class="text-center">
-        <button onclick="negociacaoController.importarNegociacoes()" class="btn btn-primary text-center" type="button">
+        <!-- onclick="negociacaoController.importarNegociacoes()" -->
+        <button class="btn btn-primary text-center" type="button" id="importa">
             Importar Negociações
         </button>
-        <button onclick="negociacaoController.apaga()" class="btn btn-primary text-center" type="button">
+        <!-- onclick="negociacaoController.apaga()"  -->
+        <button class="btn btn-primary text-center" type="button" id="apaga">
             Apagar
         </button>
     </div>
@@ -49,9 +51,18 @@
     <br>
 
     <div id="negociacoesView"> </div>
+    <script src="node_modules/systemjs/dist/system.js"></script>
+    <script>
+        System.defaultJSExtensions = true; // permite omitir a extensão .js dos imports
+        System.import('js/app/boot').catch(function(err){ 
+            console.error(err.originalErr);
+            console.error(err.message)
+        });
+    </script>   
     <!-- <script> var exports = {}; </script>
     <script src="js/app/polyfill/fetch.js"></script> -->
-    <script src="js/app/models/Negociacao.js"></script>
+
+    <!-- <script src="js/app/models/Negociacao.js"></script>
     <script src="js/app/controllers/NegociacaoController.js"></script>
     <script src="js/app/helpers/DateHelper.js"></script>
     <script src="js/app/models/ListaNegociacoes.js"></script>
@@ -64,10 +75,10 @@
     <script src="js/app/services/NegociacaoService.js"></script>
     <script src="js/app/services/HttpService.js"></script>
     <script src="js/app/services/ConnectionFactory.js"></script>
-    <script src="js/app/dao/NegociacaoDao.js"></script>
+    <script src="js/app/dao/NegociacaoDao.js"></script> 
     <script>
         var negociacaoController = new NegociacaoController();
-    </script>
+    </script> -->
 
     <!-- <script>
         let listaProxy = new Proxy(new ListaNegociacoes(), {

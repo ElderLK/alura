@@ -1,4 +1,10 @@
-class NegociacaoService{
+import { HttpService } from "./HttpService";
+import { ConnectionFactory } from "./ConnectionFactory";
+import { NegociacaoDao } from "../dao/NegociacaoDao";
+import { Negociacao } from "../models/Negociacao";
+
+
+export class NegociacaoService{
 
     constructor(){
       this._http = new HttpService();
@@ -10,9 +16,11 @@ class NegociacaoService{
           this._http
           .get('negociacoes/semana')
           .then((response) => {
+            console.log(response);
             resolve( response.map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)) )
           })
           .catch((error)=>{
+            console.log(error);
             reject('Não foi possivel obter as negociações da semana atual');
           })
         });
@@ -28,6 +36,7 @@ class NegociacaoService{
           resolve( response.map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)) )
         })
         .catch((error)=>{
+          console.log(error);
           reject('Não foi possivel obter as negociações da semana anterior');
         })
       });
@@ -42,6 +51,7 @@ class NegociacaoService{
           resolve( response.map(obj => new Negociacao(new Date(obj.data), obj.quantidade, obj.valor)) )
         })
         .catch((error)=>{
+          console.log(error);
           reject('Não foi possivel obter as negociações da semana retrasada');
         })
       });
