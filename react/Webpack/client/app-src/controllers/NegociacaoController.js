@@ -1,4 +1,4 @@
-import { Negociacoes, NegociacaoService, Negociacao } from '../domain/index.js';
+import { Negociacoes, Negociacao } from '../domain/index.js';
 import { NegociacoesView, MensagemView, Mensagem, DateConverter } from '../ui/index.js';
 import { getNegociacaoDao, Bind, getExceptionMessage, debounce, controller, bindEvent } from '../util/index.js';
 
@@ -73,7 +73,7 @@ export class NegociacaoController {
     async importaNegociacoes() {
 
         try {
-            const { NegociacaoService } = await System.import('../domain/negociacao/NegociacaoService');
+            const { NegociacaoService } = await import('../domain/negociacao/NegociacaoService');
 
             const service = new NegociacaoService();
 
