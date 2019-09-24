@@ -2,14 +2,26 @@ import React, {Component} from 'react';
 import logo from './logo.svg';
 import './css/pure-min.css';
 import './css/side-menu.css';
+import $ from 'jquery';
 
 export default class App extends Component {
 
   constructor() {
     super();
     this.state = {
-      lista: [{nome: 'alberto', email:'email@email', senha: 1234}]
+      lista: []
     }
+  }
+
+  componentDidMount(){
+    $.ajax({
+        url:"http://cdc-react.herokuapp.com/api/autores",
+        dataType: 'json',
+        success:function(resposta){
+          this.setState({lista: resposta})
+        }.bind(this)
+      }
+    )
   }
 
   render(){
@@ -40,11 +52,11 @@ export default class App extends Component {
                 <form className="pure-form pure-form-aligned">
                   <div className="pure-control-group">
                     <label htmlFor="nome">Nome</label> 
-                    <input id="nome" type="text" name="nome" value=""  />                  
+                    <input id="nome" type="text" name="nome" />                  
                   </div>
                   <div className="pure-control-group">
                     <label htmlFor="email">Email</label> 
-                    <input id="email" type="email" name="email" value=""  />                  
+                    <input id="email" type="email" name="email" />                  
                   </div>
                   <div className="pure-control-group">
                     <label htmlFor="senha">Senha</label> 
@@ -69,7 +81,7 @@ export default class App extends Component {
                     {
                       this.state.lista.map((autor)=>{
                         return (
-                            <tr>
+                            <tr key={autor.id}>
                               <td>{autor.nome}</td>
                               <td>{autor.email}</td>
                             </tr>
